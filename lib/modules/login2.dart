@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vardaanadmin/modules/home.dart';
 
 import '../constants/constants.dart';
 class Login2 extends StatefulWidget {
@@ -92,7 +93,7 @@ class _Login2State extends State<Login2> {
 
                           GestureDetector(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Login2()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>HomePage()));
                             },
                             child: Container(
                               alignment: Alignment.center,

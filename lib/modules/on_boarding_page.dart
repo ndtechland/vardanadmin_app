@@ -87,7 +87,7 @@ class OnboardingPage extends StatelessWidget {
                         decoration: BoxDecoration(
                           //gradient: MyTheme.gradient1,
                           color: _controller.selectedPageIndex.value == index
-                              ? Colors.black
+                              ? MyTheme.themecolor
                               : Colors.grey,
                           shape: BoxShape.circle,
                         ),
@@ -109,7 +109,7 @@ class OnboardingPage extends StatelessWidget {
                       height: size.height * 0.04,
                       width: size.width * 0.23,
                       decoration: BoxDecoration(
-                        color: MyTheme.ambapp5,
+                        color: MyTheme.themecolor,
                         //gradient: MyTheme.gradient7,
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -119,7 +119,7 @@ class OnboardingPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        splashColor: Colors.lightGreenAccent,
+                        splashColor: Colors.indigo,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         onPressed: _controller.forwardAct,
@@ -130,7 +130,7 @@ class OnboardingPage extends StatelessWidget {
                               Text(
                                 _controller.isLastPage ? 'START' : 'NEXT',
                                 style: TextStyle(
-                                  color: Colors.yellow.shade200,
+                                  color: Colors.indigo,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -138,7 +138,7 @@ class OnboardingPage extends StatelessWidget {
                               Icon(
                                 Icons.arrow_right,
                                 size: 16,
-                                color: Colors.yellow.shade200,
+                                color: Colors.indigo,
                               )
                             ],
                           );
@@ -161,7 +161,7 @@ class OnboardingPage extends StatelessWidget {
                       height: size.height * 0.04,
                       width: size.width * 0.14,
                       decoration: BoxDecoration(
-                        color: MyTheme.ambapp2,
+                        color: MyTheme.themecolor,
                         //gradient: MyTheme.gradient7,
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -171,7 +171,7 @@ class OnboardingPage extends StatelessWidget {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
-                        splashColor: Colors.lightGreenAccent,
+                        splashColor: Colors.indigo,
                         backgroundColor: Colors.transparent,
                         elevation: 0,
                         onPressed: () {
@@ -184,7 +184,7 @@ class OnboardingPage extends StatelessWidget {
                         child: Text(
                           'SKIP',
                           style: TextStyle(
-                            color: Colors.yellow.shade200,
+                            color: Colors.indigo,
                             fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
