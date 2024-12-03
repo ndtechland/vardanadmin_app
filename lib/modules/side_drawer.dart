@@ -3,6 +3,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vardaanadmin/modules/drivers/drivers_list.dart';
+import 'package:vardaanadmin/modules/profile.dart';
+import 'package:vardaanadmin/modules/vehicles/check_in_drivers.dart';
+import 'package:vardaanadmin/modules/vehicles/vehicles_list.dart';
 
 import '../constants/constants.dart';
 import 'login_page.dart';
@@ -79,6 +83,7 @@ class SideDrawer extends StatelessWidget {
               ),
             ),
 
+            ///Trip
             // ListTile(
             //   //horizontalTitleGap: 2.h,
             //   leading: Icon(
@@ -120,6 +125,8 @@ class SideDrawer extends StatelessWidget {
             //     //Get.offNamed('/NavBar');
             //   },
             // ),
+
+            ///Profile
             ListTile(
               // horizontalTitleGap: 2.h,
               leading: Icon(
@@ -138,7 +145,7 @@ class SideDrawer extends StatelessWidget {
               dense: true,
               // visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               title: Text(
-                'User Profile'.tr,
+                'Profile'.tr,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               tileColor:
@@ -153,48 +160,17 @@ class SideDrawer extends StatelessWidget {
 
                 ///......................................
                 // _navController.tabindex(3);
-                /// Get.to(() => ProfilePagesDriver());
+                Get.to(() => Profile());
                 //Get.to(() => BestDeal());
                 // Get.offNamed('/NavBar');
               },
             ),
+
+            ///change language
             // ListTile(
             //   //horizontalTitleGap: 2.h,
             //   leading: Icon(
-            //     Icons.edit,
-            //     color: Colors.black,
-            //     size: 16,
-            //   ),
-            //   trailing: Icon(
-            //     Icons.arrow_forward_ios_sharp,
-            //     size: 11,
-            //     color: Colors.black,
-            //   ),
-            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            //   dense: true,
-            //   // visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-            //   title: Text(
-            //     'Update Profile'.tr,
-            //     //'Gift Boxes',
-            //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-            //   ),
-            //   tileColor: Get.currentRoute == '/EditDriverProfilePages'
-            //       ? Colors.grey[300]
-            //       : null,
-            //   onTap: () async {
-            //     Get.back();
-            //
-            //     Get.to(EditDriverProfilePages());
-            //
-            //     print(Get.currentRoute);
-            //   },
-            // ),
-
-            ///
-            // ListTile(
-            //   // horizontalTitleGap: 2.h,
-            //   leading: Icon(
-            //     Icons.history,
+            //     Icons.language,
             //     color: Colors.black,
             //     size: 16,
             //   ),
@@ -207,55 +183,24 @@ class SideDrawer extends StatelessWidget {
             //   dense: true,
             //   //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
             //   title: Text(
-            //     'Payment History',
-            //     //'Our Story',
+            //     'Change Language'.tr,
             //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
             //   ),
-            //   tileColor: Get.currentRoute == '/DriverPaymentHistory'
+            //   tileColor: Get.currentRoute == '/DriverPayoutHistory'
             //       ? Colors.grey[300]
             //       : null,
             //   onTap: () async {
+            //     ///
             //     Get.back();
             //
+            //  ///   Get.to(() => LanguageDriverUpdate());
+            //
             //     ///
-            //     /// _navcontroller.tabIndex(2);
-            //     // await Get.to(() => RechargePaymentHistory());
-            //     //Get.offNamed('/OurStory');
             //   },
+            //   //
             // ),
 
-            ListTile(
-              //horizontalTitleGap: 2.h,
-              leading: Icon(
-                Icons.language,
-                color: Colors.black,
-                size: 16,
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios_sharp,
-                size: 11,
-                color: Colors.black,
-              ),
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-              dense: true,
-              //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-              title: Text(
-                'Change Language'.tr,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-              ),
-              tileColor: Get.currentRoute == '/DriverPayoutHistory'
-                  ? Colors.grey[300]
-                  : null,
-              onTap: () async {
-                ///
-                Get.back();
-
-             ///   Get.to(() => LanguageDriverUpdate());
-
-                ///
-              },
-              //
-            ),
+            ///Drivers list
             ListTile(
               //horizontalTitleGap: 2.h,
               leading: Icon(
@@ -264,7 +209,7 @@ class SideDrawer extends StatelessWidget {
                 size: 16,
               ),
               trailing: Icon(
-                Icons.arrow_forward_ios_sharp,
+                Icons.person,
                 size: 11,
                 color: Colors.black,
               ),
@@ -272,7 +217,7 @@ class SideDrawer extends StatelessWidget {
               dense: true,
               //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               title: Text(
-                'Change Password'.tr,
+                'Drivers list'.tr,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               tileColor: Get.currentRoute == '/ChangePasswordDriver'
@@ -281,16 +226,18 @@ class SideDrawer extends StatelessWidget {
               onTap: () async {
                 ///
                 Get.back();
-             ///   Get.to(() => ChangePasswordDriver());
+                Get.to(() => DriversList());
 
                 ///
               },
               //
             ),
+
+            ///Vehicles list
             ListTile(
               //horizontalTitleGap: 2.h,
               leading: Icon(
-                Icons.message_rounded,
+                Icons.car_rental_sharp,
                 color: Colors.black,
                 size: 16,
               ),
@@ -303,7 +250,7 @@ class SideDrawer extends StatelessWidget {
               dense: true,
               //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               title: Text(
-                'Feedback'.tr,
+                'Vehicles list'.tr,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               tileColor: Get.currentRoute == '/DriverPayoutHistory'
@@ -312,80 +259,119 @@ class SideDrawer extends StatelessWidget {
               onTap: () async {
                 Get.back();
 
-             ///   Get.to(() => FeedbackDriver());
-              },
-              //
+               Get.to(() => VehiclesList());
+              }
             ),
-            // ListTile(
-            //   //horizontalTitleGap: 2.h,
-            //   leading: Icon(
-            //     Icons.web,
-            //     color: Colors.black,
-            //     size: 16,
-            //   ),
-            //   trailing: Icon(
-            //     Icons.arrow_forward_ios_sharp,
-            //     size: 11,
-            //     color: Colors.black,
-            //   ),
-            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            //   dense: true,
-            //   //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-            //   title: Text(
-            //     'Website',
-            //     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-            //   ),
-            //   tileColor: Get.currentRoute == '/WhatsAppTrackOrder'
-            //       ? Colors.grey[300]
-            //       : null,
-            //   onTap: () {
-            //     Get.back();
-            //
-            //     /// Get.to(WebViewwebsitess(url: "$_url"));
-            //
-            //     // print(Get.currentRoute);
-            //     // Get.to(() => WebViewPswebsite());
-            //     // Get.offNamed('/WhatsAppTrackOrder');
-            //   },
-            // ),
 
-            ///ComplainPage
-            // ListTile(
-            //   //horizontalTitleGap: 2.h,
-            //   leading: Icon(
-            //     Icons.compare_arrows_rounded,
-            //     color: Colors.black,
-            //     size: 14,
-            //   ),
-            //   trailing: Icon(
-            //     Icons.arrow_forward_ios_sharp,
-            //     size: 11,
-            //     color: Colors.black,
-            //   ),
-            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            //   dense: true,
-            //   //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
-            //   title: Text(
-            //     'Comparison',
-            //     style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600),
-            //   ),
-            //   tileColor:
-            //       Get.currentRoute == '/ComplainPage' ? Colors.grey[300] : null,
-            //   onTap: () {
-            //     print(Get.currentRoute);
-            //     Get.back();
-            //
-            //     ///.................................................28feb....................new
-            //     //  _getProfileController.addressidApi();
-            //     // _getProfileController.update();
-            //     ///........................................................................................
-            //
-            //     // Get.to(() => ComplainPage());
-            //     Get.offNamed('/ComplainPage');
-            //   },
-            // ),
+            ///CompanyPage
+            ListTile(
+              //horizontalTitleGap: 2.h,
+              leading: Icon(
+                Icons.business_sharp,
+                color: Colors.black,
+                size: 14,
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios_sharp,
+                size: 11,
+                color: Colors.black,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              dense: true,
+              //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+              title: Text(
+                'Companies',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+              tileColor:
+                  Get.currentRoute == '/ComplainPage' ? Colors.grey[300] : null,
+              onTap: () {
+                print(Get.currentRoute);
+                Get.back();
 
-            ///here from profileeee...............................
+                ///.................................................28feb....................new
+                //  _getProfileController.addressidApi();
+                // _getProfileController.update();
+                ///........................................................................................
+
+                // Get.to(() => ComplainPage());
+                Get.offNamed('/ComplainPage');
+              },
+            ),
+
+            ///check-in drivers
+            ListTile(
+              //horizontalTitleGap: 2.h,
+              leading: Icon(
+                Icons.business_sharp,
+                color: Colors.black,
+                size: 14,
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios_sharp,
+                size: 11,
+                color: Colors.black,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              dense: true,
+              //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+              title: Text(
+                'Check-In Drivers',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+              tileColor:
+              Get.currentRoute == '/ComplainPage' ? Colors.grey[300] : null,
+              onTap: () {
+                print(Get.currentRoute);
+                Get.back();
+                Get.to(()=>CheckInDrivers());
+                ///.................................................28feb....................new
+                //  _getProfileController.addressidApi();
+                // _getProfileController.update();
+                ///........................................................................................
+
+                // Get.to(() => ComplainPage());
+                // Get.offNamed('/ComplainPage');
+              },
+            ),
+
+            ///Available drivers
+            ListTile(
+              //horizontalTitleGap: 2.h,
+              leading: Icon(
+                Icons.business_sharp,
+                color: Colors.black,
+                size: 14,
+              ),
+              trailing: Icon(
+                Icons.arrow_forward_ios_sharp,
+                size: 11,
+                color: Colors.black,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              dense: true,
+              //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
+              title: Text(
+                'Available Drivers',
+                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+              ),
+              tileColor:
+              Get.currentRoute == '/ComplainPage' ? Colors.grey[300] : null,
+              onTap: () {
+                print(Get.currentRoute);
+                Get.back();
+
+                ///.................................................28feb....................new
+                //  _getProfileController.addressidApi();
+                // _getProfileController.update();
+                ///........................................................................................
+
+                // Get.to(() => ComplainPage());
+                Get.offNamed('/ComplainPage');
+              },
+            ),
+
+            ///Routing & Cab Allocation
             ListTile(
               //horizontalTitleGap: 2.h,
               leading: Icon(
@@ -402,7 +388,7 @@ class SideDrawer extends StatelessWidget {
               dense: true,
               //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               title: Text(
-                'Support'.tr,
+                'Routing & Cab Allocation'.tr,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               tileColor: Get.currentRoute == '/PersonalProfile'
@@ -421,7 +407,7 @@ class SideDrawer extends StatelessWidget {
               },
             ),
 
-            ///here from profileeee...............................
+            ///Vehicle Inspection
             ListTile(
               //horizontalTitleGap: 2.h,
               leading: Icon(
@@ -438,7 +424,7 @@ class SideDrawer extends StatelessWidget {
               dense: true,
               //visualDensity: VisualDensity(horizontal: 0, vertical: -1),
               title: Text(
-                'Forgot Password'.tr,
+                'Vehicle Inspection'.tr,
                 style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
               ),
               tileColor: Get.currentRoute == '/ForgotPasswordDriver'
@@ -526,11 +512,10 @@ class SideDrawer extends StatelessWidget {
                 print(Get.currentRoute);
                 Get.back();
                 _launchURL(
-                    _urlprivecy); // Launch URL directly without navigating
+                    _urlprivecy);
+                // Launch URL directly without navigating
 
                 // Get.to(WebViewwebsitess(url: "$_url"));
-
-                ///................................................................
                 //  _getProfileController.addressidApi();
                 // _getProfileController.update();
                 ///...........................................................
@@ -539,45 +524,45 @@ class SideDrawer extends StatelessWidget {
               },
             ),
 
-            ListTile(
-              leading: Icon(
-                Icons.delete_forever_outlined,
-                color: Colors.black,
-                size: 16,
-              ),
-              trailing: Icon(
-                Icons.arrow_forward_ios_sharp,
-                color: Colors.black,
-                size: 11,
-              ),
-              contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-              dense: true,
-              visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-              title: Text(
-                'Delete Account'.tr,
-                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
-                //fontWeight: FontWeight.w600,
-                //color: Colors.black,
-                // ),
-              ),
-              onTap: () {
-                Get.defaultDialog(
-                  title: "Welcome To Vardaan Car",
-                  middleText: "You content goes here...",
-                  content: getContent(),
-                  barrierDismissible: true,
-                  radius: 20.0,
-                  confirm: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: confirmBtn(),
-                  ),
-                  cancel: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: cancelBtn(),
-                  ),
-                );
-              }, //PersonalDetails
-            ),
+            // ListTile(
+            //   leading: Icon(
+            //     Icons.delete_forever_outlined,
+            //     color: Colors.black,
+            //     size: 16,
+            //   ),
+            //   trailing: Icon(
+            //     Icons.arrow_forward_ios_sharp,
+            //     color: Colors.black,
+            //     size: 11,
+            //   ),
+            //   contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+            //   dense: true,
+            //   visualDensity: VisualDensity(horizontal: 0, vertical: -2),
+            //   title: Text(
+            //     'Delete Account'.tr,
+            //     style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+            //     //fontWeight: FontWeight.w600,
+            //     //color: Colors.black,
+            //     // ),
+            //   ),
+            //   onTap: () {
+            //     Get.defaultDialog(
+            //       title: "Welcome To Vardaan Car",
+            //       middleText: "You content goes here...",
+            //       content: getContent(),
+            //       barrierDismissible: true,
+            //       radius: 20.0,
+            //       confirm: Padding(
+            //         padding: const EdgeInsets.all(12.0),
+            //         child: confirmBtn(),
+            //       ),
+            //       cancel: Padding(
+            //         padding: const EdgeInsets.all(12.0),
+            //         child: cancelBtn(),
+            //       ),
+            //     );
+            //   }, //PersonalDetails
+            // ),
 
             ListTile(
               // horizontalTitleGap: 2.h,
@@ -649,7 +634,7 @@ class SideDrawer extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.red,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+            textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
         child: Text(
           "Confirm".tr,
           style: GoogleFonts.roboto(fontSize: 12, color: AppColors.th1wht2),
@@ -664,7 +649,7 @@ class SideDrawer extends StatelessWidget {
         style: ElevatedButton.styleFrom(
             backgroundColor: Colors.green,
             padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            textStyle: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+            textStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
         child: Text(
           "Cancel".tr,
           style: GoogleFonts.roboto(fontSize: 12, color: AppColors.th1wht2),

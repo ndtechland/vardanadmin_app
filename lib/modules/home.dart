@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:vardaanadmin/modules/side_drawer.dart';
+import 'package:vardaanadmin/modules/vehicles/vehicles_list.dart';
 
 import '../constants/constants.dart';
+import 'drivers/drivers_list.dart';
 
 class Testimonial {
   final String customerName;
@@ -38,17 +40,22 @@ List<String> Services1 = [
 ];
 
 List<String> Services2 = [
-  'No. of Employee',
-  'Cab Assign',
-  'Scheduled',
+  'Routing',
+  'Cab Allocation',
+  'Check-In Drivers',
+];
+List<String> Services3 = [
+  'Drivers list',
+  'Vehicles list',
+  'Vehicle Inspection',
 ];
 
-List<String> Services3 = [
-  'Report',
-  'History',
-  'Review',
-  //'Consumer Grievance',
-];
+// List<String> Services3 = [
+//   'Report',
+//   'History',
+//   'Review',
+//   //'Consumer Grievance',
+// ];
 
 List<IconData> iconList1 = [
   Icons.manage_accounts_rounded,
@@ -62,7 +69,7 @@ List<IconData> iconList1 = [
 ];
 
 List<IconData> iconList2 = [
-  Icons.people,
+  Icons.route,
   // Icons.catching_pokemon_rounded,
   Icons.car_crash_rounded,
   // Icons.gps_fixed_outlined,
@@ -73,8 +80,8 @@ List<IconData> iconList2 = [
 ];
 List<IconData> iconList3 = [
   Icons.list_alt,
-  Icons.history,
-  Icons.feedback_rounded
+  Icons.featured_play_list_rounded,
+  Icons.search
   //repeat_sharp,
   // Icons.settings,
 ];
@@ -309,41 +316,41 @@ class HomePage extends StatelessWidget {
               //mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 ///banner
-                // Container(
-                //   height: size.height * 0.19,
-                //   width: size.width,
-                //   decoration: BoxDecoration(
-                //     color: MyTheme.dvrskyblue8,
-                //   ),
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(0.0),
-                //     child: Container(
-                //       height: size.height * 0.15,
-                //       decoration: BoxDecoration(
-                //         color: Colors.transparent,
-                //         borderRadius: BorderRadius.only(
-                //             topLeft: Radius.circular(10),
-                //             topRight: Radius.circular(10)),
-                //       ),
-                //       child: Padding(
-                //         padding: const EdgeInsets.all(2.0),
-                //         child: Container(
-                //           height: size.height * 0.14,
-                //           decoration: BoxDecoration(
-                //             color: AppColors.black,
-                //             //a13,
-                //             //
-                //             borderRadius: BorderRadius.circular(10),
-                //           ),
-                //           child: Center(
-                //             child: Container()
-                //             // Mycrusial(),
-                //           ),
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  height: size.height * 0.19,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    color: MyTheme.dvrskyblue8,
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(0.0),
+                    child: Container(
+                      height: size.height * 0.15,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Container(
+                          height: size.height * 0.14,
+                          decoration: BoxDecoration(
+                            color: AppColors.black,
+                            //a13,
+                            //
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Center(
+                            child:
+                             Mycrusial(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
       
                 SizedBox(
                   height: size.height * 0.01,
@@ -858,23 +865,25 @@ class HomePage extends StatelessWidget {
                             // //
                             // ///Get.to(() => IndustryHighTension());
                             //
-                            // if (index == 0) {
-                            //   Get.to(() => ReportPayment());
-                            //
-                            //   //Get.to(ProfilePages());
-                            //   // await FlutterPhoneDirectCaller.callNumber(
-                            //   //     micccallnumber);
-                            //   //
-                            //   // makePhoneCall(
-                            //   //     "123"); // Replace with the desired phone number
-                            //   //Get.to(SelectPahseLineRange());
-                            //
-                            //   ///Get.to(() => FranchisesProfilePage());
-                            // } else if (index == 1) {
-                            //   // await FlutterPhoneDirectCaller.callNumber(
-                            //   // customercare);
-                            //   Get.to(() => HistoryBookingTabbarDriver());
-                            // } else if (index == 2) {
+                            if (index == 0) {
+                               Get.to(() => DriversList());
+                             // Navigator.push(context, MaterialPageRoute(builder: (context)=>DriversList()));
+                              //Get.to(ProfilePages());
+                              // await FlutterPhoneDirectCaller.callNumber(
+                              //     micccallnumber);
+                              //
+                              // makePhoneCall(
+                              //     "123"); // Replace with the desired phone number
+                              //Get.to(SelectPahseLineRange());
+
+                              ///Get.to(() => FranchisesProfilePage());
+                            }
+                            else if (index == 1) {
+                              // await FlutterPhoneDirectCaller.callNumber(
+                              // customercare);
+                              Get.to(() => VehiclesList());
+                            }
+                            // else if (index == 2) {
                             //   Get.to(() => ReviewRatingList());
                             //
                             //   //ReviewRatingList
@@ -962,102 +971,108 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
+}
+class Mycrusial extends StatelessWidget {
+  final _sliderKey = GlobalKey();
+  // final BannerController _bannerController = Get.put(BannerController());
+
+  Mycrusial({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+
+    // Fetch banners for the role "Driver"
+    // _bannerController.BannersApi();
+
+    return Scaffold(
+      body:
+      //Obx(() {
+        // if (_bannerController.isLoading.value) {
+        //   return Center(child: CircularProgressIndicator());
+        // }
+        //
+        // if (_bannerController.bannerDriver!.data!.isEmpty) {
+        //   return Center(child: Text("No banners available"));
+        // }
+
+       // return
+        Padding(
+          padding: EdgeInsets.all(0.0),
+          child: Container(
+            height: size.height * 0.23,
+            width: size.width,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Center(
+              child: Material(
+                borderRadius: BorderRadius.circular(10),
+                elevation: 0,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: CarouselSlider.builder(
+                    key: _sliderKey,
+                    unlimitedMode: true,
+                    autoSliderTransitionTime: Duration(milliseconds: 500),
+                    slideBuilder: (index) {
+                      // final imgpath = 'https://new.signatureresorts.in/Images/';
+                      // final bannerImage =
+                      //     "${FixedText.imgebaseurlvardan}${_bannerController.bannerDriver!.data![index].bannerImage}";
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 1),
+                        child: Material(
+                          elevation: 12,
+                          borderRadius: BorderRadius.circular(5),
+                          child: Container(
+                            height: size.height * 0.40,
+                            width: size.width,
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(5),
+                              border: Border.all(
+                                  color: Colors.grey.shade500, width: 1),
+                              image: DecorationImage(
+                                image:
+                                NetworkImage(imageList[index]),
+                                // NetworkImage(bannerImage),
+                                fit: BoxFit.fill,
+                                onError: (error, stackTrace) {
+                                  print('Image Load Error: $error');
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                    slideTransform: DefaultTransform(),
+                    slideIndicator: CircularSlideIndicator(
+                      indicatorBorderWidth: 1,
+                      indicatorRadius: 3,
+                      itemSpacing: 15,
+                      currentIndicatorColor: Colors.white,
+                      indicatorBackgroundColor: Colors.grey.shade800,
+                      padding: EdgeInsets.only(bottom: 0),
+                    ),
+                    itemCount: imageList.length,
+                    // _bannerController.bannerDriver!.data!.length,
+                    enableAutoSlider: true,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        )
+     // }),
+    );
+  }
 }
 
-// class Mycrusial extends StatelessWidget {
-//   final _sliderKey = GlobalKey();
-//   final BannerController _bannerController = Get.put(BannerController());
-//
-//   Mycrusial({Key? key}) : super(key: key);
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     final Size size = MediaQuery.of(context).size;
-//
-//     // Fetch banners for the role "Driver"
-//     _bannerController.BannersApi();
-//
-//     return Scaffold(
-//       body: Obx(() {
-//         if (_bannerController.isLoading.value) {
-//           return Center(child: CircularProgressIndicator());
-//         }
-//
-//         if (_bannerController.bannerDriver!.data!.isEmpty) {
-//           return Center(child: Text("No banners available"));
-//         }
-//
-//         return Padding(
-//           padding: EdgeInsets.all(0.0),
-//           child: Container(
-//             height: size.height * 0.23,
-//             width: size.width,
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(10),
-//             ),
-//             child: Center(
-//               child: Material(
-//                 borderRadius: BorderRadius.circular(10),
-//                 elevation: 0,
-//                 child: Container(
-//                   decoration: BoxDecoration(
-//                     borderRadius: BorderRadius.circular(5),
-//                   ),
-//                   child: CarouselSlider.builder(
-//                     key: _sliderKey,
-//                     unlimitedMode: true,
-//                     autoSliderTransitionTime: Duration(milliseconds: 500),
-//                     slideBuilder: (index) {
-//                       // final imgpath = 'https://new.signatureresorts.in/Images/';
-//                       final bannerImage =
-//                           "${FixedText.imgebaseurlvardan}${_bannerController.bannerDriver!.data![index].bannerImage}";
-//                       return Padding(
-//                         padding: const EdgeInsets.symmetric(horizontal: 1),
-//                         child: Material(
-//                           elevation: 12,
-//                           borderRadius: BorderRadius.circular(5),
-//                           child: Container(
-//                             height: size.height * 0.40,
-//                             width: size.width,
-//                             alignment: Alignment.center,
-//                             decoration: BoxDecoration(
-//                               color: Colors.grey.shade300,
-//                               borderRadius: BorderRadius.circular(5),
-//                               border: Border.all(
-//                                   color: Colors.grey.shade500, width: 1),
-//                               image: DecorationImage(
-//                                 image: NetworkImage(bannerImage),
-//                                 fit: BoxFit.fill,
-//                                 onError: (error, stackTrace) {
-//                                   print('Image Load Error: $error');
-//                                 },
-//                               ),
-//                             ),
-//                           ),
-//                         ),
-//                       );
-//                     },
-//                     slideTransform: DefaultTransform(),
-//                     slideIndicator: CircularSlideIndicator(
-//                       indicatorBorderWidth: 1,
-//                       indicatorRadius: 3,
-//                       itemSpacing: 15,
-//                       currentIndicatorColor: Colors.white,
-//                       indicatorBackgroundColor: Colors.grey.shade800,
-//                       padding: EdgeInsets.only(bottom: 0),
-//                     ),
-//                     itemCount: _bannerController.bannerDriver!.data!.length,
-//                     enableAutoSlider: true,
-//                   ),
-//                 ),
-//               ),
-//             ),
-//           ),
-//         );
-//       }),
-//     );
-//   }
-// }
 
 // void _showPowerDialog(BuildContext context, SwitchController controller) {
 //   showDialog(

@@ -76,19 +76,14 @@ class OnboardingPage extends StatelessWidget {
                 left: 20,
                 child: Row(
                   children: List.generate(
-                    _controller.onboardingPages.length,
-                        (index) => Obx(() {
+                    _controller.onboardingPages.length, (index) => Obx(() {
                       return Container(
                         margin: const EdgeInsets.all(4),
-                        width: _controller.selectedPageIndex.value == index
-                            ? 12
-                            : 12,
+                        width: _controller.selectedPageIndex.value == index ? 12 : 12,
                         height: 12,
                         decoration: BoxDecoration(
                           //gradient: MyTheme.gradient1,
-                          color: _controller.selectedPageIndex.value == index
-                              ? MyTheme.themecolor
-                              : Colors.grey,
+                          color: _controller.selectedPageIndex.value == index ? MyTheme.themecolor : Colors.grey,
                           shape: BoxShape.circle,
                         ),
                       );
@@ -127,8 +122,7 @@ class OnboardingPage extends StatelessWidget {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
-                                _controller.isLastPage ? 'START' : 'NEXT',
+                              Text(_controller.isLastPage ? 'START' : 'NEXT',
                                 style: TextStyle(
                                   color: Colors.indigo,
                                   fontSize: 14,

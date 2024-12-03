@@ -84,12 +84,13 @@ class SplashScreen extends StatelessWidget {
                   child: SizedBox(
                     width: screenWidth * 0.74,
                     height: screenHeight * 0.4,
-                    child:Lottie.asset(
-                      'lib/assets/splash_2.json',
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.fill,
-                    ),
+                    child:Image.asset("lib/assets/logo.png")
+                    // Lottie.asset(
+                    //   'lib/assets/splash_2.json',
+                    //   width: 20,
+                    //   height: 20,
+                    //   fit: BoxFit.fill,
+                    // ),
                   ),
                 );
               },

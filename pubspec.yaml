@@ -46,7 +46,7 @@ dependencies:
   flutter_carousel_slider:
   image_picker:
   file_picker:
-  flutter_inappwebview:
+#  flutter_inappwebview:
   lite_rolling_switch:
   #google_maps_flutter:
   google_maps_flutter: # Use the latest version if possible
