@@ -34,18 +34,22 @@ class OnboardingController extends GetxController {
 
   List<OnboardingInfo> onboardingPages = [
     OnboardingInfo(
-        "lib/assets/splash_1.json",
+        "lib/assets/splash1.json",
+        'Get Cabs Onlineeee',
+        'We deliver high quality, affordable online cabs services in all over india.'),
+    OnboardingInfo(
+        "lib/assets/splash2.json",
         'Get Cabs Online',
         'We deliver high quality, affordable online cabs services in all over india.'),
     OnboardingInfo(
-        "lib/assets/splash_2.json",
+        "lib/assets/splash3.json",
         //'lib/assets/image/92309-online-doctor.zip',
         'Consult to expert ',
         'Find the right cabs from our list of experienced driver.'),
-    OnboardingInfo(
-        "lib/assets/splash_3.json",
-        // 'lib/assets/image/83028-ambulance.zip',
-        'Quick Availability',
-        'Taxi Availability in 30 minutes.'),
+    // OnboardingInfo(
+    //     "lib/assets/splash_3.json",
+    //     // 'lib/assets/image/83028-ambulance.zip',
+    //     'Quick Availability',
+    //     'Taxi Availability in 30 minutes.'),
   ];
 }

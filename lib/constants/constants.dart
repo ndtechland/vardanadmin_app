@@ -6,6 +6,10 @@ import 'package:google_fonts/google_fonts.dart';
 class MyTheme {
   //#28166f this is theme
   static Color themecolor = Color(0xff00ff33);
+  static Color lightthemecolor = Color(0xff00ff33).withOpacity(0.2);
+  static Color lithemecolor = Color(0xfff4fcf5);
+  static Color themecolor1 = Color(0xff00ffb3);
+  static Color btncolor = Color(0xff26C281);
   static Color logored = Color(0xffda251d);
   static Color t1containercolor = Color(0xff041562);
   static Color whitecolor = Color(0xffEEEEEE);
@@ -243,7 +247,6 @@ class AppColors {
   static const Color mainGridLineColor = Colors.white10;
   static const Color borderColor = Colors.white54;
   static const Color gridLinesColor = Color(0x11FFFFFF);
-
   static const Color contentColorBlack = Colors.black;
   static const Color contentColorWhite = Colors.white;
   static const Color contentColorBlue = Color(0xFF2196F3);

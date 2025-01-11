@@ -1,20 +1,73 @@
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:vardaanadmin/splash_screen/splash_screen.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'controllers/language_controller.dart';
+import 'modules/app_translations.dart';
+import 'modules/test.dart';
+@pragma('vm:entry-point')
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  print(message.notification!.title.toString());
+}
+Future<void> main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    // options: DefaultFirebaseOptions.currentPlatform,
+  );
+  const AndroidInitializationSettings initializationSettingsAndroid =
+  AndroidInitializationSettings('@mipmap/ic_launcher');
+  const InitializationSettings initializationSettings =
+  InitializationSettings(android: initializationSettingsAndroid);
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print("mytoken  ${fcmToken}");
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  HttpOverrides.global = MyHttpOverrides();
+  await flutterLocalNotificationsPlugin.initialize(
+    initializationSettings,
+    onDidReceiveNotificationResponse: (NotificationResponse response) {
+      print("Notification tapped: ${response.payload}");
+    },
+  );
+  await GetStorage.init(); // Initialize GetStorage
+  // Initialize SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  runApp( MyApp());
 
-void main() {
-  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Future<void> backgroundHandler(RemoteMessage message) async {
+  print(message.data.toString());
+  print(message.notification!.title);
+}
 
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+  }
+}
+class MyApp extends StatelessWidget {
+   MyApp({super.key});
+  final LanguageController languageController = Get.put(LanguageController());
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Vardaan Admin',
       debugShowCheckedModeBanner: false,
+      locale: Locale(languageController.selectedLocale.value),
+      translations: AppTranslations(), // Your translations
+      ///locale: Locale('en', 'US'), // Default locale
+      fallbackLocale: Locale('en', 'US'),
       theme: ThemeData(
         // This is the theme of your application.
         //

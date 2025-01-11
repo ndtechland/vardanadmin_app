@@ -122,52 +122,62 @@ class _VehiclesListState extends State<VehiclesList> {
                                               padding: const EdgeInsets.only(left: 18.0,right: 10),
                                               child: Row(
                                                 children: [
-                                                  CircleAvatar(
-                                                    radius: 55,
-                                                    backgroundImage: AssetImage("lib/assets/vehicle.png"),
+                                                  Container(
+                                                    color: MyTheme.primary3,
+                                                    child: Column(
+                                                      children: [
+                                                        SizedBox(height: 18,),
+                                                        CircleAvatar(
+                                                          radius: 25,
+                                                          backgroundImage: AssetImage("lib/assets/vehicle.png"),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
+                                                  // CircleAvatar(
+                                                  //   radius: 55,
+                                                  //   backgroundImage: AssetImage("lib/assets/vehicle.png"),
+                                                  // ),
                                                   SizedBox(width: 20,),
+                                                  // SizedBox(width: 10,),
                                                   Container(
                                                     child: Column(
                                                       crossAxisAlignment: CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.center,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       children: [
+                                                        SizedBox(height: 20,),
                                                         Row(
                                                           children: [
-                                                           Icon(Icons.directions_car_filled,color: MyTheme.t1containercolor,),
-                                                            SizedBox(width: 6,),
+                                                            Text("Vehicle No.: ",style: TextStyle(
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 16
+                                                            ),),
                                                             Text("HR38AE1588",style: TextStyle(
                                                                 fontWeight: FontWeight.w500,
                                                                 fontSize: 16
                                                             ),),
                                                           ],
                                                         ),
-                                                        SizedBox(width: 20,),
+                                                        SizedBox(height: 6,),
                                                         Row(
                                                           children: [
-                                                            Icon(Icons.car_rental,color: MyTheme.t1containercolor,),
-                                                            SizedBox(width: 6,),
-
-                                                            // Text("Age: ",style: TextStyle(
-                                                            //     fontWeight: FontWeight.bold,
-                                                            //     fontSize: 16
-                                                            // ),),
+                                                            Text("Age: ",style: TextStyle(
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 16
+                                                            ),),
                                                             Text("32 ",style: TextStyle(
                                                                 fontWeight: FontWeight.w500,
                                                                 fontSize: 16
                                                             ),),
                                                           ],
                                                         ),
-                                                        SizedBox(width: 20,),
+                                                        SizedBox(height: 6,),
                                                         Row(
                                                           children: [
-                                                            Icon(Icons.car_crash,color: MyTheme.t1containercolor,),
-                                                            SizedBox(width: 6,),
-
-                                                            // Text("Mobile: ",style: TextStyle(
-                                                            //     fontWeight: FontWeight.bold,
-                                                            //     fontSize: 16
-                                                            // ),),
+                                                            Text("Vehicle Name: ",style: TextStyle(
+                                                                fontWeight: FontWeight.bold,
+                                                                fontSize: 16
+                                                            ),),
                                                             Text("Tata Curvv",style: TextStyle(
                                                                 fontWeight: FontWeight.w500,
                                                                 fontSize: 14
@@ -177,7 +187,58 @@ class _VehiclesListState extends State<VehiclesList> {
 
                                                       ],
                                                     ),
-                                                  )
+                                                  ),
+                                                  // Container(
+                                                  //   child: Column(
+                                                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                                                  //     mainAxisAlignment: MainAxisAlignment.center,
+                                                  //     children: [
+                                                  //       Row(
+                                                  //         children: [
+                                                  //          Icon(Icons.directions_car_filled,color: MyTheme.t1containercolor,),
+                                                  //           SizedBox(width: 6,),
+                                                  //           Text("HR38AE1588",style: TextStyle(
+                                                  //               fontWeight: FontWeight.w500,
+                                                  //               fontSize: 16
+                                                  //           ),),
+                                                  //         ],
+                                                  //       ),
+                                                  //       SizedBox(width: 20,),
+                                                  //       Row(
+                                                  //         children: [
+                                                  //           Icon(Icons.car_rental,color: MyTheme.t1containercolor,),
+                                                  //           SizedBox(width: 6,),
+                                                  //
+                                                  //           // Text("Age: ",style: TextStyle(
+                                                  //           //     fontWeight: FontWeight.bold,
+                                                  //           //     fontSize: 16
+                                                  //           // ),),
+                                                  //           Text("32 ",style: TextStyle(
+                                                  //               fontWeight: FontWeight.w500,
+                                                  //               fontSize: 16
+                                                  //           ),),
+                                                  //         ],
+                                                  //       ),
+                                                  //       SizedBox(width: 20,),
+                                                  //       Row(
+                                                  //         children: [
+                                                  //           Icon(Icons.car_crash,color: MyTheme.t1containercolor,),
+                                                  //           SizedBox(width: 6,),
+                                                  //
+                                                  //           // Text("Mobile: ",style: TextStyle(
+                                                  //           //     fontWeight: FontWeight.bold,
+                                                  //           //     fontSize: 16
+                                                  //           // ),),
+                                                  //           Text("Tata Curvv",style: TextStyle(
+                                                  //               fontWeight: FontWeight.w500,
+                                                  //               fontSize: 14
+                                                  //           ),),
+                                                  //         ],
+                                                  //       ),
+                                                  //
+                                                  //     ],
+                                                  //   ),
+                                                  // )
                                                 ],
                                               ),
                                             ),

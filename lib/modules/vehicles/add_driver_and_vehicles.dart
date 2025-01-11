@@ -107,7 +107,9 @@ class AddDriverAndVehicles extends StatelessWidget {
                                         .map<DropdownMenuItem<String>>((String value) {
                                       return DropdownMenuItem<String>(
                                         value: value,
-                                        child: Text(value, style: TextStyle(color: MyTheme.t1containercolor)),
+                                        child: Text(value, style: TextStyle(color: MyTheme.t1containercolor,
+                                          overflow: TextOverflow.ellipsis, // Prevent overflow
+                                        ),)
                                       );
                                     }).toList(),
                                   ),
@@ -234,7 +236,7 @@ class AddDriverAndVehicles extends StatelessWidget {
                                     height: h/17,
                                     width: w/1.5,
                                     decoration: BoxDecoration(
-                                        color: MyTheme.t1containercolor,
+                                        color: MyTheme.btncolor,
                                         borderRadius: BorderRadius.circular(12)
                                     ),
                                     child: Text("Check - In",style: TextStyle(

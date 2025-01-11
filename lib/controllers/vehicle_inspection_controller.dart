@@ -1,0 +1,168 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../../constants/constants.dart';
+
+class VehicleInspectionController extends GetxController {
+  RxString dropdownValue = "Select".obs;
+  RxBool allCheckValue = false.obs;
+  RxString selectedTripType= '1'.obs;
+
+  // Checklist values
+  RxBool acValue = false.obs;
+  RxBool liquorDrugsValue = false.obs;
+  RxBool wiperValue = false.obs;
+  RxBool nationalPermitValue = false.obs;
+  RxBool wBrokenValue = false.obs;
+  RxBool visibleBodyPaintValue = false.obs;
+  RxBool allSeatBeltsValue = false.obs;
+  RxBool gpsValue = false.obs;
+  RxBool stateValue = false.obs;
+  RxBool plyingValue = false.obs;
+  RxBool dirtyValue = false.obs;
+  RxBool seatCoverValue = false.obs;
+  RxBool headlightsValue = false.obs;
+  RxBool insuranceValue = false.obs;
+  RxBool unregisteredValue = false.obs;
+  RxBool driverUniformValue = false.obs;
+  RxBool spareWheelValue = false.obs;
+  RxBool rcBookValue = false.obs;
+  RxBool pollutionValue = false.obs;
+  RxBool fireValue = false.obs;
+  RxBool toolKitValue = false.obs;
+  RxBool fitnessValue = false.obs;
+  RxBool commercialLicValue = false.obs;
+  RxBool firstAidValue = false.obs;
+  RxBool fogLampValue = false.obs;
+  RxBool passengerTaxValue = false.obs;
+  RxBool vehicleModeValue = false.obs;
+  // Remark controllers
+  TextEditingController acRemarkController = TextEditingController();
+  TextEditingController liquorRemarkController = TextEditingController();
+  TextEditingController wiperRemarkController = TextEditingController();
+  TextEditingController nationalRemarkController = TextEditingController();
+  TextEditingController wRemarkController = TextEditingController();
+  TextEditingController visibleRemarkController = TextEditingController();
+  TextEditingController allSeatsRemarkController = TextEditingController();
+  TextEditingController gpsRemarkController = TextEditingController();
+  TextEditingController stateRemarkController = TextEditingController();
+  TextEditingController plyingRemarkController = TextEditingController();
+  TextEditingController dirtyRemarkController = TextEditingController();
+  TextEditingController seatCoverRemarkController = TextEditingController();
+  TextEditingController headlightsRemarkController = TextEditingController();
+  TextEditingController insuranceRemarkController = TextEditingController();
+  TextEditingController unregisteredRemarkController = TextEditingController();
+  TextEditingController driverUniformRemarkController = TextEditingController();
+  TextEditingController spareWheelRemarkController = TextEditingController();
+  TextEditingController rcBookRemarkController = TextEditingController();
+  TextEditingController pollutionRemarkController = TextEditingController();
+  TextEditingController fireRemarkController = TextEditingController();
+  TextEditingController toolKitRemarkController = TextEditingController();
+  TextEditingController fitnessRemarkController = TextEditingController();
+  TextEditingController commercialLicRemarkController = TextEditingController();
+  TextEditingController firstAidRemarkController = TextEditingController();
+  TextEditingController fogLampRemarkController = TextEditingController();
+  TextEditingController passengerTaxRemarkController = TextEditingController();
+  TextEditingController vehicleModeRemarkController = TextEditingController();
+  TextEditingController penaltyAmoRemarkController = TextEditingController();
+  TextEditingController penaltyDesRemarkController = TextEditingController();
+  TextEditingController totalCountOfNCRemarkController = TextEditingController();
+  TextEditingController feedbackRemarkController = TextEditingController();
+  // Reset all values
+  void resetValues() {
+    dropdownValue.value = "Select";
+    allCheckValue.value = false;
+    acValue.value = false;
+    liquorDrugsValue.value = false;
+    wiperValue.value = false;
+    nationalPermitValue.value = false;
+    wBrokenValue.value = false;
+    visibleBodyPaintValue.value = false;
+    allSeatBeltsValue.value = false;
+    gpsValue.value = false;
+    stateValue.value = false;
+    plyingValue.value = false;
+    dirtyValue.value = false;
+    seatCoverValue.value = false;
+    headlightsValue.value = false;
+    insuranceValue.value = false;
+    unregisteredValue.value = false;
+    driverUniformValue.value = false;
+    spareWheelValue.value = false;
+    rcBookValue.value = false;
+    pollutionValue.value = false;
+    fireValue.value = false;
+    toolKitValue.value = false;
+    fitnessValue.value = false;
+    commercialLicValue.value = false;
+    firstAidValue.value = false;
+    fogLampValue.value = false;
+    passengerTaxValue.value = false;
+    vehicleModeValue.value = false;
+    // Clear remark controllers
+    acRemarkController.clear();
+    liquorRemarkController.clear();
+    wiperRemarkController.clear();
+    nationalRemarkController.clear();
+    wRemarkController.clear();
+    visibleRemarkController.clear();
+    allSeatsRemarkController.clear();
+    gpsRemarkController.clear();
+    stateRemarkController.clear();
+    plyingRemarkController.clear();
+    dirtyRemarkController.clear();
+    seatCoverRemarkController.clear();
+    headlightsRemarkController.clear();
+    insuranceRemarkController.clear();
+    unregisteredRemarkController.clear();
+    driverUniformRemarkController.clear();
+    spareWheelRemarkController.clear();
+    rcBookRemarkController.clear();
+    pollutionRemarkController.clear();
+    fireRemarkController.clear();
+    toolKitRemarkController.clear();
+    fitnessRemarkController.clear();
+    commercialLicRemarkController.clear();
+    firstAidRemarkController.clear();
+    fogLampRemarkController.clear();
+    passengerTaxRemarkController.clear();
+    vehicleModeRemarkController.clear();
+    penaltyAmoRemarkController.clear();
+    penaltyDesRemarkController.clear();
+    totalCountOfNCRemarkController.clear();
+    feedbackRemarkController.clear();
+  }
+  void selectShiftTime(String id) {
+    selectedTripType.value = id;
+  }
+  // Set all checklist values
+  void toggleAllValues(bool? newValue) {
+    allCheckValue.value = newValue ?? false;
+    acValue.value = newValue ?? false;
+    liquorDrugsValue.value = newValue ?? false;
+    wiperValue.value = newValue ?? false;
+    nationalPermitValue.value = newValue ?? false;
+    wBrokenValue.value = newValue ?? false;
+    visibleBodyPaintValue.value = newValue ?? false;
+    allSeatBeltsValue.value = newValue ?? false;
+    gpsValue.value = newValue ?? false;
+    stateValue.value = newValue ?? false;
+    plyingValue.value = newValue ?? false;
+    dirtyValue.value = newValue ?? false;
+    seatCoverValue.value = newValue ?? false;
+    headlightsValue.value = newValue ?? false;
+    insuranceValue.value = newValue ?? false;
+    unregisteredValue.value = newValue ?? false;
+    driverUniformValue.value = newValue ?? false;
+    spareWheelValue.value = newValue ?? false;
+    rcBookValue.value = newValue ?? false;
+    pollutionValue.value = newValue ?? false;
+    fireValue.value = newValue ?? false;
+    toolKitValue.value = newValue ?? false;
+    fitnessValue.value = newValue ?? false;
+    commercialLicValue.value = newValue ?? false;
+    firstAidValue.value = newValue ?? false;
+    fogLampValue.value = newValue ?? false;
+    passengerTaxValue.value = newValue ?? false;
+    vehicleModeValue.value = newValue ?? false;
+  }
+}

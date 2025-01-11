@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:vardaanadmin/constants/constants.dart';
-
 import '../modules/home.dart';
 class AddDriverVehicleController extends GetxController{
   var isLoading= false.obs;
@@ -15,6 +14,7 @@ class AddDriverVehicleController extends GetxController{
    var deviceId = ''.obs;
   List<String> deviceIdList = ['1','2','3','4','5','6',];
   List<String> checkedInVehicles = [];
+  TextEditingController driverNames= TextEditingController();
   void selectVehicleType(int id) {
     selectedVehicleId.value = id;
   }
@@ -25,7 +25,6 @@ class AddDriverVehicleController extends GetxController{
     }
 
     if (checkedInVehicles.contains(selectedValue.value)) {
-
       Get.defaultDialog(
         custom: Icon(Icons.cancel,color: Colors.red,size: 20,),
         radius: 8,

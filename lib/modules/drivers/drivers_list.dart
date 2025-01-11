@@ -19,7 +19,7 @@ class _DriversListState extends State<DriversList> {
         appBar: AppBar(
           backgroundColor: MyTheme.themecolor,
           title: Text(
-            "Vehicles List",
+            "Drivers List",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -121,17 +121,29 @@ class _DriversListState extends State<DriversList> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 18.0,right: 10),
                                         child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                          CircleAvatar(
-                                            radius: 55,
-                                            backgroundImage: AssetImage("lib/assets/driver.png"),
+                                          Container(
+                                            color: MyTheme.primary3,
+                                            child: Column(
+                                              children: [
+                                                SizedBox(height: 18,),
+                                                CircleAvatar(
+                                                  radius: 25,
+                                                  backgroundImage: AssetImage("lib/assets/driver.png"),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                            Spacer(),
+                                            // Spacer(),
+                                            SizedBox(width: 10,),
                                             Container(
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 children: [
+                                                  SizedBox(height: 20,),
                                                   Row(
                                                     children: [
                                                       Text("Name: ",style: TextStyle(
@@ -143,7 +155,9 @@ class _DriversListState extends State<DriversList> {
                                                           fontSize: 16
                                                       ),),
                                                     ],
-                                                  ), Row(
+                                                  ),
+                                                  SizedBox(height: 6,),
+                                                  Row(
                                                     children: [
                                                       Text("Age: ",style: TextStyle(
                                                         fontWeight: FontWeight.bold,
@@ -154,7 +168,9 @@ class _DriversListState extends State<DriversList> {
                                                           fontSize: 16
                                                       ),),
                                                     ],
-                                                  ), Row(
+                                                  ),
+                                                  SizedBox(height: 6,),
+                                                  Row(
                                                     children: [
                                                       Text("Mobile: ",style: TextStyle(
                                                         fontWeight: FontWeight.bold,

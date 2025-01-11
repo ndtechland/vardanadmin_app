@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12895046720",
+    "project_id": "vardaanadmin",
+    "storage_bucket": "vardaanadmin.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12895046720:android:d3e3449f5c1ff73db4a3a5",
+        "android_client_info": {
+          "package_name": "com.ndtechland.vardaanadmin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdzZS0RnvTiHFLbXt5uYtreOtSuu68RQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

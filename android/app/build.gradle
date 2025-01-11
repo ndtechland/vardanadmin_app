@@ -3,6 +3,7 @@ plugins {
     id "kotlin-android"
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
+    id 'com.google.gms.google-services'
 }
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
@@ -31,15 +32,15 @@ def flutterVersionName = localProperties.getProperty('flutter.versionName')
 if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
+
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
-//apply plugin: "com.google.gms.google-services"
-
+apply plugin: "com.google.gms.google-services"
 
 android {
     namespace = "com.ndtechland.vardaanadmin"
-    compileSdk = 34
+    compileSdk = 35
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -83,10 +84,11 @@ android {
 flutter {
     source = "../.."
 }
-//dependencies {
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
-//    implementation("com.google.firebase:firebase-messaging-ktx")
-//    implementation("com.google.firebase:firebase-analytics-ktx")
-//}
+dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation(platform("com.google.firebase:firebase-bom:33.7.0"))
+    implementation("com.google.firebase:firebase-messaging-ktx")
+    implementation("com.google.firebase:firebase-analytics-ktx")
+}
 

@@ -1,15 +1,28 @@
 import 'dart:io';
 
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vardaanadmin/modules/drivers/available_drivers.dart';
+import 'package:vardaanadmin/modules/profile.dart';
+import 'package:vardaanadmin/modules/routing_cab_allocations/routing.dart';
+import 'package:vardaanadmin/modules/routing_cab_allocations/show_all_routes.dart';
 import 'package:vardaanadmin/modules/side_drawer.dart';
+import 'package:vardaanadmin/modules/vehicles/check_in_drivers.dart';
+import 'package:vardaanadmin/modules/vehicles/vehicle_inspection.dart';
 import 'package:vardaanadmin/modules/vehicles/vehicles_list.dart';
 
 import '../constants/constants.dart';
+import '../controllers/contact_us__support_controller.dart';
+import '../controllers/help_controller.dart';
 import 'drivers/drivers_list.dart';
+import 'help.dart';
+import 'local_notification_service.dart';
+import 'notification_sender.dart';
+import 'notification_service.dart';
 
 class Testimonial {
   final String customerName;
@@ -41,7 +54,7 @@ List<String> Services1 = [
 
 List<String> Services2 = [
   'Routing',
-  'Cab Allocation',
+  'Available Drivers',
   'Check-In Drivers',
 ];
 List<String> Services3 = [
@@ -98,15 +111,23 @@ List<String> imageList = [
   //'https://plus.unsplash.com/premium_photo-1661277663422-26a6fe569350?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 ];
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   // final SwitchController switchController = Get.put(SwitchController());
   HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   GlobalKey<ScaffoldState> _key = new GlobalKey();
+
   String micccallnumber = "7666008833";
+
   String customercare = "1912";
+
   final Uri _url = Uri.parse('https://vardaancab.com');
 
-  //http://hargharbijli.bsphcl.co.in/Grievanceportal/default.aspx
   ///whats app launcher for mobile.....
 
   _launchWhatsApp() async {
@@ -157,14 +178,11 @@ class HomePage extends StatelessWidget {
   }
 
   ///url launcher for web...
-
   Future<void> _launchUrl() async {
     if (!await launchUrl(_url)) {
       throw 'Could not launch $_url';
     }
   }
-
-  //
 
   // Function to show emergency confirmation dialog
   void _showEmergencyDialog(BuildContext context) {
@@ -172,7 +190,7 @@ class HomePage extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: MyTheme.dvrskyblue6,
+          backgroundColor: AppColors.white,
           //Colors.red[50], // Light red background for emergency
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0), // Rounded corners
@@ -239,7 +257,6 @@ class HomePage extends StatelessWidget {
   }
 
 // Dialog Function
-
   Future<void> _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
@@ -248,6 +265,40 @@ class HomePage extends StatelessWidget {
     }
   }
 
+  HelpEmployeeController _helpEmployeeController = Get.put(HelpEmployeeController());
+
+  ContactUsGetController _contactUsGetController = Get.put(ContactUsGetController());
+  NotificationService notificationService = NotificationService();
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data.containsKey('id')) {
+      String id = message.data['id'];
+      // Handle navigation based on the notification
+    }
+  }
+@override
+void initState(){
+  notificationService.notificationRequestPermission();
+  notificationService.getDeviceToken();
+  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    // LocalNotificationService.createanddisplaynotification(message);
+    LocalNotificationService.setupFirebaseListeners();
+  });
+  FirebaseMessaging.instance.getInitialMessage().then((message) {
+    if (message != null) {
+      _handleMessage(message);
+    }
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((message) {
+    if (message.notification != null) {
+      _handleMessage(message);
+    }
+  });
+  FirebaseMessaging.instance.getToken().then((deviceId) {
+    print("Device ID (FCM Token): $deviceId");
+  });
+super.initState();
+}
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -256,7 +307,7 @@ class HomePage extends StatelessWidget {
       child: Scaffold(
         backgroundColor: AppColors.white,
         key: _key,
-      
+
         //th1whtbackgrd,
         appBar: AppBar(
           elevation: 0,
@@ -272,7 +323,7 @@ class HomePage extends StatelessWidget {
                 Icons.menu,
                 color: MyTheme.t1containercolor,
               )),
-      
+
           ///
           title: Text("Vardaan Admin",style: TextStyle(
             color: MyTheme.t1containercolor,
@@ -303,12 +354,12 @@ class HomePage extends StatelessWidget {
             //   },
             // ),
         //  ],
-      
+
           //Text("Suvidha"),
         ),
-      
+
         drawer: SideDrawer(),
-      
+
         body: SafeArea(
           child: SingleChildScrollView(
             child: Column(
@@ -351,7 +402,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-      
+
                 SizedBox(
                   height: size.height * 0.01,
                 ),
@@ -435,12 +486,12 @@ class HomePage extends StatelessWidget {
                 //     ),
                 //   ),
                 // ),
-      
+
                 SizedBox(
                   height: size.height * 0.015,
                 ),
                 //Spacer(),
-      
+
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -459,27 +510,31 @@ class HomePage extends StatelessWidget {
                             // //
                             // ///Get.to(() => IndustryHighTension());
                             //
-                            // if (index == 0) {
-                            //   Get.to(() => ProfilePagesDriver());
-                            //   // await FlutterPhoneDirectCaller.callNumber(
-                            //   //     micccallnumber);
-                            //   //
-                            //   // makePhoneCall(
-                            //   //     "123"); // Replace with the desired phone number
-                            //   //Get.to(SelectPahseLineRange());
-                            //
-                            //   ///Get.to(() => FranchisesProfilePage());
-                            // } else if (index == 1) {
-                            //   // await FlutterPhoneDirectCaller.callNumber(
-                            //   // customercare);
-                            //   Get.to(() => ContactUs());
-                            // } else if (index == 2) {
-                            //   _showEmergencyDialog(
-                            //       context); // Show emergency confirmation dialog
-                            //
-                            //   /// _launchWhatsApp();
-                            //   //Get.to(() => IndustryHighTension());
-                            // } else if (index == 3) {
+                            if (index == 0) {
+                              Get.to(() => Profile());
+                              // await FlutterPhoneDirectCaller.callNumber(
+                              //     micccallnumber);
+                              //
+                              // makePhoneCall(
+                              //     "123"); // Replace with the desired phone number
+                              //Get.to(SelectPahseLineRange());
+
+                              ///Get.to(() => FranchisesProfilePage());
+                            }
+                            else if (index == 1) {
+                              // await FlutterPhoneDirectCaller.callNumber(
+                              // customercare);
+                              await _contactUsGetController.contactusApi();
+                              Get.to(() => ContactUsUser());
+                            }
+                            else if (index == 2) {
+                              _showEmergencyDialog(
+                                  context); // Show emergency confirmation dialog
+
+                              /// _launchWhatsApp();
+                              //Get.to(() => IndustryHighTension());
+                            }
+                            // else if (index == 3) {
                             //   //_launchUrl();
                             //
                             //   //Get.to(WebViewwebsitess(url: "$_url"));
@@ -547,7 +602,7 @@ class HomePage extends StatelessWidget {
                     );
                   },
                 ),
-      
+
                 // InkWell(
                 //   onTap: () {
                 //     //Get.to(NewConnectionPage1());
@@ -649,7 +704,7 @@ class HomePage extends StatelessWidget {
                 // SizedBox(
                 //   height: size.height * 0.01,
                 // ),
-      
+
                 // Padding(
                 //   padding: EdgeInsets.symmetric(horizontal: size.width * 0.025),
                 //   child: Align(
@@ -690,16 +745,16 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-      
+
                 SizedBox(
                   height: size.height * 0.026,
                 ),
-      
+
                 Container(
                   // height: size.height * 0.14,
                   width: size.width,
                   //color: AppColors.th1wht3,
-      
+
                   // color: AppColors.newgray,
                   child: GridView.builder(
                     physics: NeverScrollableScrollPhysics(),
@@ -709,8 +764,7 @@ class HomePage extends StatelessWidget {
                         crossAxisCount: 3, // Number of columns
                         crossAxisSpacing: 5, // Spacing between columns
                         mainAxisSpacing: 4,
-                        mainAxisExtent:
-                        size.height * 0.177 // Spacing between rows
+                        mainAxisExtent: size.height * 0.177 // Spacing between rows
                     ),
                     itemBuilder: (context, index) {
                       return Column(
@@ -719,30 +773,31 @@ class HomePage extends StatelessWidget {
                             onTap: () async {
                               // //
                               //
-                              // if (index == 0) {
-                              //   //ReqestUserList
-                              //   Get.to(() => ReqestUserList());
-                              //
-                              //   ///tod:........
-                              //
-                              //   // await FlutterPhoneDirectCaller.callNumber(
-                              //   //     micccallnumber);
-                              //   //
-                              //   // makePhoneCall(
-                              //   //     "123"); // Replace with the desired phone number
-                              //   //Get.to(SelectPahseLineRange());
-                              //
-                              //   ///Get.to(() => FranchisesProfilePage());
-                              // } else if (index == 1) {
-                              //   // await FlutterPhoneDirectCaller.callNumber(
-                              //   // customercare);
-                              //   Get.to(() => TrackUserList());
-                              // } else if (index == 2) {
-                              //   Get.to(() => ScheduledBookingUser());
-                              //
-                              //   ////_launchWhatsApp();
-                              //   // Get.to(() => ScheduleBookingTabbar());
-                              // } else if (index == 3) {
+                              if (index == 0) {
+                                //ReqestUserList
+                                 Get.to(() => Routingg());
+
+                                ///tod:........
+
+                                // await FlutterPhoneDirectCaller.callNumber(
+                                //     micccallnumber);
+                                //
+                                // makePhoneCall(
+                                //     "123"); // Replace with the desired phone number
+                                //Get.to(SelectPahseLineRange());
+
+                                ///Get.to(() => FranchisesProfilePage());
+                              } else if (index == 1) {
+                                // await FlutterPhoneDirectCaller.callNumber(
+                                // customercare);
+                                Get.to(() => AvailableDrivers());
+                              } else if (index == 2) {
+                                Get.to(() => CheckInDrivers());
+
+                                ////_launchWhatsApp();
+                                // Get.to(() => ScheduleBookingTabbar());
+                              }
+                              // else if (index == 3) {
                               //   //_launchUrl();
                               //
                               //   //Get.to(WebViewwebsitess(url: "$_url"));
@@ -814,7 +869,7 @@ class HomePage extends StatelessWidget {
                 //   color: AppColors.a19,
                 //   thickness: 10,
                 // ),
-      
+
                 Padding(
                   padding: EdgeInsets.symmetric(
                       horizontal: size.width * 0.00, vertical: size.height * 0.0),
@@ -842,11 +897,11 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ),
-      
+
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-      
+
                 GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
@@ -882,6 +937,11 @@ class HomePage extends StatelessWidget {
                               // await FlutterPhoneDirectCaller.callNumber(
                               // customercare);
                               Get.to(() => VehiclesList());
+                            }
+                            else if (index == 2) {
+                              // await FlutterPhoneDirectCaller.callNumber(
+                              // customercare);
+                              Get.to(() => VehicleInspection());
                             }
                             // else if (index == 2) {
                             //   Get.to(() => ReviewRatingList());
@@ -959,7 +1019,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(
                   height: size.height * 0.0,
                 ),
-      
+
                 SizedBox(
                   height: size.height * 0.0,
                 ),
@@ -971,7 +1031,6 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
-
 }
 class Mycrusial extends StatelessWidget {
   final _sliderKey = GlobalKey();
